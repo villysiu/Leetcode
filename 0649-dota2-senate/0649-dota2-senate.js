@@ -3,28 +3,29 @@
  * @return {string}
  */
 var predictPartyVictory = function(senate) {
-    let rarr=new Set(), darr=new Set()
-    let ptr=0, next=senate.length
+    let rarr=[], darr=[]
+    let next=senate.length
     for(let i=0;i<senate.length;i++){
-        senate[i]==="R" ?  rarr.add(i) : darr.add(i)
+        senate[i]==="R" ?  rarr.push(i) : darr.push(i)
     }
     // console.log(rarr, darr)
    
-    while(rarr.size>0 && darr.size>0){
-        
-        let r=[...rarr][0], d=[...darr][0]
+    while(rarr.length>0 && darr.length>0){
+        // console.log(rarr, darr)
+        let r=rarr[0], d=darr[0]
         if(r<d){
-            rarr.delete(r)
-            rarr.add(next++)
+            rarr.shift()
+            rarr.push(next++)
             // next++;
-            darr.delete(d)
+            darr.shift()
             
         }else{
-            darr.delete(d)
-            darr.add(next++)
+            darr.shift()
+            darr.push(next++)
             // next++
-            rarr.delete(r)
+            rarr.shift()
         }
     }
-    return rarr.size===0 ? "Dire" : "Radiant"
+    // console.log(rarr, darr)
+    return rarr.length===0 ? "Dire" : "Radiant"
 };
