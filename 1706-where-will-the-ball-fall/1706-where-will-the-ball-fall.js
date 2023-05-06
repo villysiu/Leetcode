@@ -3,47 +3,35 @@
  * @return {number[]}
  */
 var findBall = function(grid) {
-    let res=[]
-    let map=new Map()
-    for(let col=0;col<grid[0].length;col++){
-        let r=0;
-        let c=col;
-        let path=new Set()
-        
-        
-        while(r<grid.length){
-            // console.log(r, c)
-            if(map.has(JSON.stringify([r,c]))){
-                res.push(map.get(JSON.stringify([r,c])))
-            }    
-            if(grid[r][c]===1 && (c+1)<grid[r].length && grid[r][c+1]===1){
-                
-                r++;
-                c++;
-                // path.add(grid[r][c])
-            }
-            else if(grid[r][c]===-1 && (c-1)>=0 && grid[r][c-1]===-1){
-                r++;
-                c--;
-                // path.add(grid[r][c])
-            }
-            
-            else{ //grid[r][c+1]===-1
-                res.push(-1)
-                for([i,j] of path)
-                    map.set(JSON.stringify([i,j]), -1)
-                break;
-            }
- 
-        }      
-        // console.log("bootom: "+r+"  "+c)
-        if(r===grid.length){ 
-            res.push(c)
-            for([i,j] of path)
-                map.set(JSON.stringify([i,j]), c)
+    let output = [];
+    let dfs = function(col, row) {
+        if (row === grid.length) {
+            return col;
         }
-        
+
+        if (grid[row][col] === -1 && col - 1 < 0) {
+            return -1;
+        }
+        if (grid[row][col] === 1 && col + 1 >= grid[0].length) {
+            return -1;
+        }
+        if (grid[row][col] === 1 && grid[row][col+1] === -1) {
+            return -1;
+        }
+        if (grid[row][col] === -1 && grid[row][col-1] === 1) {
+            return -1;
+        }
+
+        if (grid[row][col] === 1) {
+            return dfs(col+1, row+1);
+        } else {
+            return dfs(col-1, row+1)
+        }
+    } 
+
+    for (let i = 0; i < grid[0].length; i++) {
+        output.push(dfs(i, 0));
     }
-    return res
+    return output;
     
 };
