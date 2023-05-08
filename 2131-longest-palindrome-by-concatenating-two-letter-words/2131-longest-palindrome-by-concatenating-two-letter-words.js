@@ -18,7 +18,7 @@ var longestPalindrome = function(words) {
     }
    
     for(let w of map.keys()){
-        if(w[0]===w[1] && map.get(w[0]+w[1])===1){
+        if(map.get(w[0]+w[0])===1){
             return count+2
         }
     }
