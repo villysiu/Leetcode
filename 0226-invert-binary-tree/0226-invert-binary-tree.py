@@ -10,11 +10,7 @@ class Solution:
             if(node==None):
                 return node
             
-            lnode=helper(node.left)
-            rnode=helper(node.right)
-            
-            node.left=rnode
-            node.right=lnode
+            node.left, node.right=helper(node.right), helper(node.left)
             
             return node
         
