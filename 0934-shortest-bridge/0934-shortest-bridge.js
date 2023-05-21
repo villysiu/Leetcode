@@ -34,18 +34,18 @@ var shortestBridge = function(grid) {
     
     // console.log(queue)
     // console.log(grid)
-    let visited=new Set()
+    // let visited=new Set()
     let found=0
     
     function expand(){
         while(queue.length>0){
             let [r,c]=queue.shift()
-            visited.add(`${r}~${c}`)
+            // visited.add(`${r}~${c}`)
+            
             for(let d of dirs){
                 let R=d[0]+r, C=d[1]+c
-                if(R<0 || C<0 || R===n || C===n || visited.has(`${R}~${C}`)) continue;
+                if(R<0 || C<0 || R===n || C===n || grid[R][C]==="#") continue;
                 if(grid[R][C]===1){    
-
                     return grid[r][c]
                 }
                 if(grid[R][C]<grid[r][c]){
@@ -53,6 +53,7 @@ var shortestBridge = function(grid) {
                     queue.push([R,C])
                 }
             }
+            grid[r][c]="#"
         }
         return 0
     }
