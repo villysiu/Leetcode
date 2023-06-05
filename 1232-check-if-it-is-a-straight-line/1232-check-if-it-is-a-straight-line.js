@@ -3,6 +3,7 @@
  * @return {boolean}
  */
 var checkStraightLine = function(coordinates) {
+    if(coordinates.length===2) return true
     let point1=coordinates.shift()
     let point2=coordinates.shift()
     function checkAllEqual(pos, val){
