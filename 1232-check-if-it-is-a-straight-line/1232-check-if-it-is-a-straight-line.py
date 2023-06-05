@@ -13,14 +13,12 @@ class Solution:
         
         def checkRatio(px,py, ratio):
             for i in range(2, n):
-                
                 qx,qy= coordinates[i] 
-                print(px, py, qx,qy)
-                if py-qy==0:
-                    return False
-                if (px-qx)/(py-qy) != ratio:
+                # print(px, py, qx,qy)
+                if py-qy==0 or (px-qx)/(py-qy) != ratio:
                     return False
             return True
+        
         # veritcal line
         if point1[0] == point2[0]: 
             return checkAllEqual(0, point1[0])
