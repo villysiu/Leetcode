@@ -11,22 +11,19 @@
  * @return {number}
  */
 var getMinimumDifference = function(root) {
-    let arr=[]
+    let diff=Infinity
+    let prev=Infinity
     function helper(node){
-        if(node===null)
-            return 
+        if(!node) return
         helper(node.left)
+        diff=Math.min(diff, Math.abs(prev-node.val))
+        // console.log(node.val, prev, diff)
+        prev = node.val
         helper(node.right)
-        arr.push(node.val)
+        
+        
+        
     }
     helper(root)
-    
-    let min=Infinity
-    arr.sort((a,b)=>a-b)
-    for(let i=1;i<arr.length;i++){
-        min=Math.min(min, arr[i]-arr[i-1])
-    }
-    return min
-    
-   
+    return diff
 };
