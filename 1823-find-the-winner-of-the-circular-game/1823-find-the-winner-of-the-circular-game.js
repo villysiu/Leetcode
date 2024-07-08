@@ -23,9 +23,9 @@ var findTheWinner = function(n, k) {
     // 3
     if(k===1) return n
     
-    let arr = new Array(n)
-    for(let i=0;i<n;i++)
-        arr[i]=i+1
+    let arr = []
+    for(let i=1;i<=n;i++)
+        arr.push(i)
     
     while(arr.length >= k ){
         arr=[...arr.slice(k), ...arr.slice(0,k-1)]
