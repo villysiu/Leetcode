@@ -11,10 +11,11 @@ var maxBottlesDrunk = function(numBottles, numExchange) {
     
     let res = numBottles
     while(numBottles >= numExchange){
-        let empty = numBottles - numExchange
+        // let empty = numBottles - numExchange
+        numBottles = numBottles - numExchange + 1
         res++
         numExchange++
-        numBottles = empty+1
+        
     }
     return res
 };
