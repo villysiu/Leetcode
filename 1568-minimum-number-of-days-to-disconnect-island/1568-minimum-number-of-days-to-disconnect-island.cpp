@@ -25,7 +25,7 @@ public:
             }
             return islands;
         };
-        cout << count_islands();
+        
         if (count_islands() != 1) return 0;
         
         for (int i = 0; i < grid.size(); i++) {
