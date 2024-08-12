@@ -27,7 +27,8 @@ KthLargest.prototype.add = function(val) {
         let mid = parseInt((l+r)/2)
         // console.log(l, r, mid)
         if(val === this.sortedArr[mid]){
-            this.sortedArr = [...this.sortedArr.slice(0,mid), val, ...this.sortedArr.slice(mid, this.k-1)]
+            this.sortedArr.splice(mid, 0, val)
+            // this.sortedArr = [...this.sortedArr.slice(0,mid), val, ...this.sortedArr.slice(mid, this.k-1)]
             break;
         }else if(val < this.sortedArr[mid]){
             l=mid+1
@@ -49,7 +50,8 @@ KthLargest.prototype.add = function(val) {
     if(l>r){
         // console.log(this.sortedArr.slice(0,l))
         // console.log(this.sortedArr.slice(l, this.k-1))
-        this.sortedArr = [...this.sortedArr.slice(0,l), val, ...this.sortedArr.slice(l, this.k-1)]
+        this.sortedArr.splice(l, 0, val)
+        // this.sortedArr = [...this.sortedArr.slice(0,l), val, ...this.sortedArr.slice(l, this.k-1)]
     }
     // console.log("end")
     // console.log(this.sortedArr)
