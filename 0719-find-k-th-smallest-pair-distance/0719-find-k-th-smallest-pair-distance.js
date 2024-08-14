@@ -23,7 +23,7 @@ var smallestDistancePair = function(nums, k) {
         
     }
     // console.log(map)
-    let sorted = [...set].sort((a,b)=>a-b)
+    let sorted = [...set]
 
 
     
