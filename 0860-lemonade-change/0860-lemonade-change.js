@@ -12,14 +12,11 @@ var lemonadeChange = function(bills) {
             billArr[0]++;
         }
         else if(p===10){
-            if(billArr[0]>0){
-                billArr[0]--
-                billArr[1]++
-            }
-            else{
+            if(billArr[0]===0)
                 return false
-            }
-        
+            
+            billArr[0]--
+            billArr[1]++
         }
         else { // p===20
             if(billArr[0]>0 && billArr[1]>0){
