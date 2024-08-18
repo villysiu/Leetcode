@@ -16,7 +16,7 @@ var maxPoints = function(points) {
         }
         // console.log(temp)
         for(let c=n-1, max=0; c>=0; c--){
-            max = Math.max(max-1, temp[c], points[r-1][c])
+            max = Math.max(max-1, temp[c])
             points[r][c] += max
         }
     }
