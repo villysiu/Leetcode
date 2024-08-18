@@ -3,26 +3,23 @@
  * @return {number}
  */
 var maxPoints = function(points) {
-    let prev = points[0]; 
-    let curr = new Array(points[0].length); 
+    let m = points.length
+    let n = points[0].length
     
-    for(let i = 1; i<points.length; i++){
+    for(let r=1; r<m; r++){
         
-        // from left to right; 
-        for(let j = 0, maxAdd=0; j<points[0].length;j++){
-            maxAdd = Math.max(maxAdd-1, prev[j]);
-            curr[j] = points[i][j] + maxAdd;
+        let temp = new Array(n)
+        for(let c=0, max = 0; c<n; c++){
+            max = Math.max(max-1, points[r-1][c])
+            temp[c] = max 
+            
         }
-        
-        for(let j = points[0].length-1, maxAdd = 0; j>=0; j--){
-            maxAdd = Math.max(maxAdd-1, prev[j]);
-            curr[j] = Math.max(curr[j], points[i][j] + maxAdd)
+        // console.log(temp)
+        for(let c=n-1, max=0; c>=0; c--){
+            max = Math.max(max-1, temp[c], points[r-1][c])
+            points[r][c] += max
         }
-        
-        
-        prev = curr; 
-        curr = Array(points[0].length)
-        
     }
-    return Math.max(...prev)
+    // console.log(points)
+    return Math.max(...points[m-1])
 };
