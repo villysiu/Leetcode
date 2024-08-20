@@ -2,30 +2,35 @@
  * @param {number[]} piles
  * @return {number}
  */
-// dp[i][j] is the maximum number of stones Alex can get when starting at index i with M = j
-// sufsum[i] is the total number of stones from index i to the end
-// The dp matrix for Lee is the same. And the stragegy for Alex is to choose an optimal X to minimize the number of stones Lee can get when starting at index (i + X) with M = max(X,j). Here we have the recurrence formula
-
-// dp[i][j] = max(sufsum[i] - dp[i + X][max(j, X)]) where 1<= X <= 2j;
 var stoneGameII = function(piles) {
+    const n = piles.length;
     
-    const length = piles.length;
-  const dp = [...Array(length + 1).fill(null)].map((_) =>
-    Array(length + 1).fill(0)
-  );
-  const sufsum = new Array(length + 1).fill(0);
-  for (let i = length - 1; i >= 0; i--) {
-    sufsum[i] = sufsum[i + 1] + piles[i];
-  }
-  for (let i = 0; i <= length; i++) {
-    dp[i][length] = sufsum[i];
-  }
-  for (let i = length - 1; i >= 0; i--) {
-    for (let j = length - 1; j >= 1; j--) {
-      for (let X = 1; X <= 2 * j && i + X <= length; X++) {
-        dp[i][j] = Math.max(dp[i][j], sufsum[i] - dp[i + X][Math.max(j, X)]);
-      }
+    const dp = Array.from({ length: n }, () => Array(n + 1).fill(0));
+    const suffixSum = Array(n).fill(0);
+    
+    suffixSum[n - 1] = piles[n - 1];
+    
+    for (let i = n - 2; i >= 0; i--) {
+        suffixSum[i] = suffixSum[i + 1] + piles[i];
     }
-  }
-  return dp[0][1];
+    // console.log(suffixSum)
+    
+    for (let i = n - 1; i >= 0; i--) {
+        for (let m = 1; m <= n; m++) {
+            if (i + 2 * m >= n) {
+                dp[i][m] = suffixSum[i];
+            } else {
+                for (let x = 1; x <= 2 * m; x++) {
+                    
+                    dp[i][m] = Math.max(dp[i][m], suffixSum[i] - dp[i + x][Math.max(m, x)]);
+                    // console.log("i: "+i+", x: "+x+", m: "+m+" dp[i][m]: "+dp[i][m])
+                }
+            }
+        }
+        // console.log(i)
+        // console.log(dp[i])
+    }
+    
+    // console.log(dp)
+    return dp[0][1];
 };
