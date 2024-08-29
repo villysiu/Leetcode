@@ -3,54 +3,27 @@
  * @return {number}
  */
 var removeStones = function(stones) {
-    let rowHash = {}
-    let colHash = {}
-    for(let [r,c] of stones){
-        if(!rowHash[r])
-            rowHash[r] = []
-        if(!colHash[c])
-            colHash[c] = []
-        rowHash[r].push(c)
-        colHash[c].push(r)
+    let count = 0
+    let len = stones.length
+    
+    while(stones.length > 0){
         
-    }
+        let queue = [stones.shift()]
 
-    
-    let visited = new Set()
-    let res = 0
-    const helper = (row, col) =>{
-        
-    
-        const colHelper = col => {
-            for(let r of colHash[col]){
-                if(visited.has(`${r}~${col}`))
-                    continue;
-                visited.add(`${r}~${col}`)
+            
+        for(let [qr, qc] of queue){
+            for(let i=stones.length-1; i>=0; i--){
                 
-                rowHelper(r)
+                let [sr, sc] = stones[i]
+                
+                if( qr===sr || qc==sc){
+                    queue.push(stones[i])
+                    stones.splice(i,1)
+                    
+                }
             }
         }
-        
-        const rowHelper= (row) =>{
-            for(let c of rowHash[row]){
-                if(visited.has(`${row}~${c}`))
-                    continue;
-                visited.add(`${row}~${c}`)
-                
-                colHelper(c)
-            }
-        }
-        rowHelper(row)
-        colHelper(col)
-        
-        
+        count++;
     }
-    for(let [r,c] of stones){
-        if(visited.has(`${r}~${c}`))
-            continue;
-        
-         helper(r,c)
-        res+=1
-    }
-    return stones.length - res
+    return len - count
 };
