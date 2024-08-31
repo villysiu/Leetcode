@@ -7,27 +7,26 @@
  * @return {number}
  */
 var maxProbability = function(n, edges, succProb, start_node, end_node) {
-    let maxProb = new Array(n).fill(0.0);
-    maxProb[start_node] = 1.0;
-
-    for (let i = 0; i < n - 1; i++) {
-        let updated = false;
-        for (let j = 0; j < edges.length; j++) {
-            let u = edges[j][0];
-            let v = edges[j][1];
-            let prob = succProb[j];
-
-            if (maxProb[u] * prob > maxProb[v]) {
-                maxProb[v] = maxProb[u] * prob;
-                updated = true;
+    let dist = new Array(n).fill(0)
+    dist[start_node] = 1
+    
+    for(let i=0; i<n; i++){
+        let updated = false
+        for(let j = 0; j<edges.length; j++){
+            let [u, v] = edges[j]
+            let prob = succProb[j]
+            if(dist[u] * prob > dist[v]){
+                dist[v] = dist[u] * prob
+                updated = true
             }
-            if (maxProb[v] * prob > maxProb[u]) {
-                maxProb[u] = maxProb[v] * prob;
-                updated = true;
+            if(dist[v] * prob > dist[u]){
+                dist[u] = dist[v] * prob
+                updated = true
             }
         }
-        if (!updated) break;
+        if(!updated)
+            break;
+        
     }
-
-    return maxProb[end_node];
+    return dist[end_node]
 };
