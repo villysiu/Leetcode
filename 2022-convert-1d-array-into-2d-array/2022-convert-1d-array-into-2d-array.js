@@ -5,12 +5,9 @@
  * @return {number[][]}
  */
 var construct2DArray = function(original, m, n) {
-    if(original.length !== m*n)
+    if(original.length !== m * n)
         return []
+    let _ = require("lodash");
+    return _.chunk(original, n)
     
-    let res = []
-    for(let c=0; c<m*n; c+=n){
-        res.push(original.slice(c,c+n))
-    }
-    return res
 };
