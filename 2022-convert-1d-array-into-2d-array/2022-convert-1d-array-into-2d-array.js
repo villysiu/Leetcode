@@ -9,7 +9,7 @@ var construct2DArray = function(original, m, n) {
         return []
     
     let res = []
-    for(let r =0, c=0; r<m; r++, c+=n){
+    for(let c=0; c<m*n; c+=n){
         res.push(original.slice(c,c+n))
     }
     return res
