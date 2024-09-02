@@ -8,11 +8,11 @@ var chalkReplacer = function(chalk, k) {
     for(let c of chalk){
         total += c
     }
-    console.log(total)
+    // console.log(total)
     
     
     let diff = k % total
-    console.log(diff)
+    // console.log(diff)
     if (diff === 0)
         return 0
     
