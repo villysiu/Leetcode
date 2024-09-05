@@ -19,11 +19,12 @@ var missingRolls = function(rolls, mean, n) {
     let quotient = parseInt(diff / n)
     
     
-    let res = new Array(n).fill(quotient)
+//     let res = new Array(n).fill(quotient)
     
-    for(let i=0, r=remainder; r>0; i++, r--){
-        res[i]+=1
-    }
+//     for(let i=0, r=remainder; r>0; i++, r--){
+//         res[i]+=1
+//     }
+    let res = [...new Array(remainder).fill(quotient+1), ...new Array(n-remainder).fill(quotient)]
     
     return res
 };
