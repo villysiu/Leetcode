@@ -13,14 +13,14 @@ var missingRolls = function(rolls, mean, n) {
     let diff = mean * (n + m) - sum
     if(diff > n * 6 || diff <n* 1)
         return []
+    
     // console.log(diff)
     let remainder = diff % n
     let quotient = parseInt(diff / n)
-    let res = []
     
-    for(let i=0;i<n;i++){
-        res.push(quotient)
-    }
+    
+    let res = new Array(n).fill(quotient)
+    
     for(let i=0, r=remainder; r>0; i++, r--){
         res[i]+=1
     }
