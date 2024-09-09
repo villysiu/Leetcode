@@ -19,16 +19,27 @@
  * @return {boolean}
  */
 var isSubPath = function(head, root) {
-    
-    function match(node, list){
-        if(!list) return true
-        if(!node || node.val!==list.val) return false
-        return (match(node.left, list.next) || match(node.right, list.next))
+    const isMatch = (tNode, lNode) =>{
+        if(!lNode)
+            return true
+        if(!tNode)
+            return false
+        
+        if(tNode.val === lNode.val){
+            // console.log(tNode.val, lNode.val)
+            return (isMatch(tNode.left, lNode.next) || isMatch(tNode.right, lNode.next))
+        }
+        return false
     }
-    function helper(node, list=head){
-        if(!node) return false
-        if(match(node, list)) return true
-        return (helper(node.left) || helper(node.right))
+    const helper = tree =>{
+        if(!tree) 
+            return false
+      
+        if(isMatch(tree, head) )
+            return true
+        
+        return helper(tree.left) || helper(tree.right)
+        
     }
     return helper(root)
 };
