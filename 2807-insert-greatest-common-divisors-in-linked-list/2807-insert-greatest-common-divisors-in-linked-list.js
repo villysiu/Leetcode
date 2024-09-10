@@ -20,7 +20,7 @@ var insertGreatestCommonDivisors = function(head) {
     }
    // console.log(GCD(6,10))
     let p = head
-    while(p && p.next){
+    while(p.next){
         // console.log(p.val, p.next.val)
         let node = new ListNode(GCD(p.val, p.next.val), p.next)
         
