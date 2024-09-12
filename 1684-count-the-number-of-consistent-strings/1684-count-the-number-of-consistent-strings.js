@@ -5,15 +5,19 @@
  */
 var countConsistentStrings = function(allowed, words) {
     const set = new Set(allowed)
-    let count = words.length;
-    for(let word of words){
-        for(let i=0; i<word.length; i++){
-            if(!set.has(word[i])){
-                count--;
-                break;
+    // console.log(set.size)
+    let count = 0
+    
+    const isSubset = (word, set) =>{
+        for(const elem of word) {
+            if (!set.has(elem)) {
+              return false;
             }
-        }
-        
+          }
+          return true;
+    }
+    for(let word of words){
+        count += isSubset(word, set) 
     }
     return count;
 };
