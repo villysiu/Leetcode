@@ -5,27 +5,36 @@
  */
 var xorQueries = function(arr, queries) {
     
-    
-    
-    const n = arr.length;
-    const pre = new Array(n);
-    pre[0] = arr[0];
-    
-    // Compute prefix XOR array
-    for (let i = 1; i < n; i++) {
-        pre[i] = pre[i - 1] ^ arr[i];
+    const helper = (num1, num2) =>{
+        let str1 = num1.toString(2)
+        let str2 = num2.toString(2)
+        let len = Math.max(str1.length, str2.length)
+        let s1 = str1.padStart(len, "0")
+        let s2 = str2.padStart(len, "0")
+        
+        let str = ""
+        for(let i=0; i< len; i++)
+            str += s1[i] !== s2[i] ? "1" : "0"
+          
+        // console.log(str)
+        return parseInt(str, 2)
     }
-    // console.log(pre)
-    const res = [];
-    
-    // Answer each query
-    for (const [left, right] of queries) {
-        if (left === 0) {
-            res.push(pre[right]);
-        } else {
-            res.push(pre[right] ^ pre[left - 1]);
-        }
+    let prev = 0
+    let prefixSum = []
+    for(let n of arr){
+        let xorNum = helper(prev, n)
+        prefixSum.push(xorNum)
+        prev = xorNum
+        
     }
-    
-    return res;
+    console.log(prefixSum)
+    let res = []
+    for(let [l, r] of queries){
+        if(l===0)
+            res.push(prefixSum[r])
+        else
+            res.push(helper(prefixSum[l-1], prefixSum[r]))
+    }
+    return res
+
 };
