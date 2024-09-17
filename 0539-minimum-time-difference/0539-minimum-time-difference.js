@@ -3,22 +3,23 @@
  * @return {number}
  */
 var findMinDifference = function(timePoints) {
-    let minutes = timePoints.map(time => {
-        let [h, m] = time.split(':').map(Number);
-        return h * 60 + m;
-    });
-
-    // Sort times in ascending order
-    minutes.sort((a, b) => a - b);
-
-    // Find minimum difference across adjacent elements
-    let minDiff = Infinity;
-    for (let i = 0; i < minutes.length - 1; i++) {
-        minDiff = Math.min(minDiff, minutes[i + 1] - minutes[i]);
+    let regexp = /\d{2}/g
+    const [start, end] = [0, 1440]
+    let mins = []
+    for(let tp of timePoints){
+        
+        let [hr, min] = tp.match(regexp)
+        
+        let tpMins = parseInt(hr) * 60 + parseInt(min)
+        mins.push(tpMins)
     }
 
-    // Consider the circular difference between last and first element
-    minDiff = Math.min(minDiff, 24 * 60 - minutes[minutes.length - 1] + minutes[0]);
-
-    return minDiff;
+    mins.sort((a,b)=>a-b)
+    // console.log(mins)
+    let res = Infinity
+    for(let i=1; i<mins.length; i++){
+        res = Math.min(res, Math.abs(mins[i]-mins[i-1]))
+    }
+    
+    return Math.min(res, mins[0]+1440 - mins[mins.length-1])
 };
