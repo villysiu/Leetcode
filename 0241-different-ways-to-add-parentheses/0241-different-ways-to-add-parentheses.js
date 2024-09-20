@@ -3,22 +3,23 @@
  * @return {number[]}
  */
 var diffWaysToCompute = function(expression) {
-    
+    const opSet = new Set(["+", "-", "*"])
     const helper = (exp) => {
     
         let res = []
         for(let i=0; i<exp.length; i++){
-            
-            if(exp[i]==="+" || exp[i]==="-" || exp[i]==="*"){
+        
+            if(opSet.has(exp[i])){
+                const op = exp[i]
                 let leftArr = helper(exp.slice(0, i)) 
                 let rightArr = helper(exp.slice(i+1))
                 // console.log(leftArr, rightArr)
                 
                 for(let m of leftArr){
                     for(let n of rightArr){
-                        if(exp[i] === "+")
+                        if(op === "+")
                             res.push(m+n)
-                        else if(exp[i] === "-")
+                        else if(op === "-")
                             res.push(m-n)
                         else 
                             res.push(m*n)
