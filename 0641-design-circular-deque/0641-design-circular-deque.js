@@ -11,7 +11,7 @@ var MyCircularDeque = function(k) {
  * @return {boolean}
  */
 MyCircularDeque.prototype.insertFront = function(value) {
-    if(this.queue.length === this.k)
+    if(this.isFull())
         return false
     this.queue.unshift(value)
     return true
@@ -22,7 +22,7 @@ MyCircularDeque.prototype.insertFront = function(value) {
  * @return {boolean}
  */
 MyCircularDeque.prototype.insertLast = function(value) {
-    if(this.queue.length === this.k)
+    if(this.isFull())
         return false
     this.queue.push(value)
     return true
@@ -32,7 +32,7 @@ MyCircularDeque.prototype.insertLast = function(value) {
  * @return {boolean}
  */
 MyCircularDeque.prototype.deleteFront = function() {
-    if(this.queue.length === 0)
+    if(this.isEmpty())
         return false
     this.queue.shift()
     return true
@@ -42,7 +42,7 @@ MyCircularDeque.prototype.deleteFront = function() {
  * @return {boolean}
  */
 MyCircularDeque.prototype.deleteLast = function() {
-    if(this.queue.length === 0)
+    if(this.isEmpty())
         return false
     this.queue.pop()
     return true
@@ -52,7 +52,7 @@ MyCircularDeque.prototype.deleteLast = function() {
  * @return {number}
  */
 MyCircularDeque.prototype.getFront = function() {
-    if(this.queue.length === 0)
+    if(this.isEmpty())
         return -1
     return this.queue[0]
 };
@@ -61,7 +61,7 @@ MyCircularDeque.prototype.getFront = function() {
  * @return {number}
  */
 MyCircularDeque.prototype.getRear = function() {
-    if(this.queue.length === 0)
+    if(this.isEmpty())
         return -1
     return this.queue[this.queue.length-1]
 };
