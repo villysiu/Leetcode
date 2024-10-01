@@ -23,6 +23,6 @@ var canArrange = function(arr, k) {
             map.set(f, map.get(f) + 1)  
         }
     }
-    console.log(map)
+    // console.log(map)
     return [...map.values()].every(n=>n===0)
 };
